@@ -44,7 +44,13 @@ public class CustomerServiceImpl implements CustomerService {
 
     @Override
     public void updateCustomer(String customerId, CustomerDTO customerDTO) {
-
+        Optional<Customer> customer =customerDAO.findById(customerId);
+        if (customer.isPresent()){
+            customer.get().setId(customerDTO.getId());
+            customer.get().setName(customerDTO.getName());
+            customer.get().setAddress(customerDTO.getAddress());
+            customer.get().setPhone(customerDTO.getPhone());
+        }
     }
 
     @Override
