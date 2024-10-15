@@ -1,5 +1,6 @@
 package lk.ijse.posbackendv2.services.impl;
 
+import lk.ijse.posbackendv2.customStatusCode.selectedCustomerErrorCodes;
 import lk.ijse.posbackendv2.dao.CustomerDAO;
 import lk.ijse.posbackendv2.dto.CustomerStatus;
 import lk.ijse.posbackendv2.dto.impl.CustomerDTO;
@@ -34,12 +35,18 @@ public class CustomerServiceImpl implements CustomerService {
 
     @Override
     public List<CustomerDTO> getAllCustomers() {
-        return List.of();
+        List<Customer> allCustomers =customerDAO.findAll();
+        return mapper.asCustomerDTO(allCustomers);
     }
 
     @Override
     public CustomerStatus getCustomer(String customerId) {
-        return null;
+        if (customerDAO.existsById(customerId)){
+            Customer selectedCustomer = customerDAO.getReferenceById(customerId);
+            return mapper.toCustomerDto(selectedCustomer);
+        }else {
+            return new selectedCustomerErrorCodes(2,"customer with productId "+customerId+" not found!");
+        }
     }
 
     @Override

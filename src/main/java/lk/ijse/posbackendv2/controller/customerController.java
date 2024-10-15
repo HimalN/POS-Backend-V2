@@ -1,6 +1,7 @@
 package lk.ijse.posbackendv2.controller;
 
 
+import lk.ijse.posbackendv2.dto.CustomerStatus;
 import lk.ijse.posbackendv2.dto.impl.CustomerDTO;
 import lk.ijse.posbackendv2.exception.CustomerNotFoundException;
 import lk.ijse.posbackendv2.exception.DataPersistException;
@@ -11,6 +12,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.awt.*;
+import java.util.List;
 
 @CrossOrigin(origins = "http:127.0.0.1:5500")
 @RestController
@@ -59,7 +63,6 @@ public class customerController {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
-
     @PatchMapping(consumes = MediaType.MULTIPART_FORM_DATA_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Void> update(
         @RequestPart("customerId")String customerId,
@@ -81,6 +84,14 @@ public class customerController {
         }catch (Exception e){
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
+    }
+    @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
+    public List<CustomerDTO> getAllCustomers(){
+        return userService.getAllCustomers();
+    }
+    @GetMapping(value = "/{customerId}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public CustomerStatus getSelectedCustomer (@PathVariable("customerId")String customerId){
+        return userService.getCustomer(customerId);
     }
 
 }
