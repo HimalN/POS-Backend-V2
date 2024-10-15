@@ -2,6 +2,7 @@ package lk.ijse.posbackendv2.controller;
 
 
 import lk.ijse.posbackendv2.dto.impl.CustomerDTO;
+import lk.ijse.posbackendv2.exception.CustomerNotFoundException;
 import lk.ijse.posbackendv2.exception.DataPersistException;
 import lk.ijse.posbackendv2.services.CustomerService;
 import org.modelmapper.ModelMapper;
@@ -45,6 +46,18 @@ public class customerController {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
-
+    @DeleteMapping(value = "/{userId}")
+    public ResponseEntity<Void> deleteCustomer(@PathVariable("userId") String userId) {
+        try {
+            userService.deleteCustomer(userId);
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        }catch (CustomerNotFoundException e){
+            e.printStackTrace();
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }catch (Exception e){
+            e.printStackTrace();
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
 
 }
