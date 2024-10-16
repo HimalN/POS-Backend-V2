@@ -89,6 +89,7 @@ public class customerController {
     public List<CustomerDTO> getAllCustomers(){
         return userService.getAllCustomers();
     }
+
     @GetMapping(value = "/{customerId}", produces = MediaType.APPLICATION_JSON_VALUE)
     public CustomerStatus getSelectedCustomer (@PathVariable("customerId")String customerId){
         return userService.getCustomer(customerId);
