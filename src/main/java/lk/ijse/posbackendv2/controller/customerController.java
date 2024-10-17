@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.*;
 import java.awt.*;
 import java.util.List;
 
-@CrossOrigin(origins = "http:127.0.0.1:5500")
+@CrossOrigin(origins = "http://localhost:63342")
 @RestController
 @RequestMapping("api/v1/customers")
 public class customerController {
@@ -29,10 +29,10 @@ public class customerController {
 
     @PostMapping(consumes = MediaType.MULTIPART_FORM_DATA_VALUE,produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Void> save(
-            @RequestPart ("customerId" )String customerId,
-            @RequestPart ("name" )String name,
-            @RequestPart ("address" )String address,
-            @RequestPart ("phone" )String phone
+            @RequestPart ("customerID" )String customerId,
+            @RequestPart ("customerName" )String name,
+            @RequestPart ("customerAddress" )String address,
+            @RequestPart ("phoneNumber" )String phone
     )
     {
         try {
