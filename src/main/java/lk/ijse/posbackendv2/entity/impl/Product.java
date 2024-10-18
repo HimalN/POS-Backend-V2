@@ -21,8 +21,9 @@ public class Product implements SuperEntity {
     private String productId;
     private String productName;
     private String productType;
-    private int productQty;
+    private String productWeight;
     private double productPrice;
+    private int productQty;
     @OneToMany(mappedBy = "product")
     private List<Order> orders;
 }

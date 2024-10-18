@@ -12,6 +12,7 @@ public class productDTO implements productStatus {
     private String productId;
     private String productName;
     private String productType;
-    private int productQty;
+    private String productWeight;
     private double productPrice;
+    private int productQty;
 }
