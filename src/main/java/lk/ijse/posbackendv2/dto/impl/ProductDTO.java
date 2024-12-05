@@ -8,7 +8,7 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class productDTO implements productStatus {
+public class ProductDTO implements productStatus {
     private String productId;
     private String productName;
     private String productType;

@@ -69,4 +69,14 @@ public class CustomerServiceImpl implements CustomerService {
             customerDAO.deleteById(customerId);
         }
     }
+
+    @Override
+    public CustomerDTO getCustomers(String customerID) {
+        if (customerDAO.existsById(customerID)) {
+            Customer customer = customerDAO.getReferenceById(customerID);
+            return mapper.toCustomerDto(customer);
+        } else {
+            throw new CustomerNotFoundException("Customer not found");
+        }
+    }
 }

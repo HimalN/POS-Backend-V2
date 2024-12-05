@@ -2,7 +2,7 @@ package lk.ijse.posbackendv2.services.impl;
 
 import lk.ijse.posbackendv2.customStatusCode.selectedProductErrorCodes;
 import lk.ijse.posbackendv2.dao.ProductDAO;
-import lk.ijse.posbackendv2.dto.impl.productDTO;
+import lk.ijse.posbackendv2.dto.impl.ProductDTO;
 import lk.ijse.posbackendv2.dto.productStatus;
 import lk.ijse.posbackendv2.entity.impl.Product;
 import lk.ijse.posbackendv2.exception.ProductNotFoundException;
@@ -26,7 +26,7 @@ public class ProductServiceImpl implements ProductService {
     private Mapping mapper;
 
     @Override
-    public void saveProduct(productDTO productDTO) {
+    public void saveProduct(ProductDTO productDTO) {
         Product saveProduct = productDAO.save(mapper.toProductEntity(productDTO));
         System.out.println("method called");
         if (saveProduct == null) {
@@ -36,7 +36,7 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public List<productDTO> getAllProducts() {
+    public List<ProductDTO> getAllProducts() {
         List<Product> productList = productDAO.findAll();
         return mapper.asProductDTOList(productList);
     }
@@ -62,7 +62,7 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public void updateProduct(String productId, productDTO productDTO) {
+    public void updateProduct(String productId, ProductDTO productDTO) {
         Optional<Product> product = productDAO.findById(productId);
         if (product.isPresent()){
             product.get().setProductId(productDTO.getProductId());
@@ -70,6 +70,16 @@ public class ProductServiceImpl implements ProductService {
             product.get().setProductType(productDTO.getProductType());
             product.get().setProductQty(productDTO.getProductQty());
             product.get().setProductPrice(productDTO.getProductPrice());
+        }
+    }
+
+    @Override
+    public ProductDTO searchItems(String itemID) {
+        if (productDAO.existsById(itemID)) {
+            Product item = productDAO.getReferenceById(itemID);
+            return mapper.toProductDTO(item);
+        } else {
+            throw new ProductNotFoundException("Item not found");
         }
     }
 }

@@ -1,8 +1,9 @@
 package lk.ijse.posbackendv2.util;
 
-import lk.ijse.posbackendv2.dto.impl.CustomerDTO;
-import lk.ijse.posbackendv2.dto.impl.productDTO;
+import lk.ijse.posbackendv2.dto.impl.*;
 import lk.ijse.posbackendv2.entity.impl.Customer;
+import lk.ijse.posbackendv2.entity.impl.Order;
+import lk.ijse.posbackendv2.entity.impl.OrderDetailsEntity;
 import lk.ijse.posbackendv2.entity.impl.Product;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeToken;
@@ -28,16 +29,30 @@ public class Mapping {
     }
 
     // Product mapping
-    public productDTO toProductDTO(Product product) {
-        return modelMapper.map(product, productDTO.class);
+    public ProductDTO toProductDTO(Product product) {
+        return modelMapper.map(product, ProductDTO.class);
     }
-    public Product toProductEntity(productDTO productDTO) {
+    public Product toProductEntity(ProductDTO productDTO) {
         return modelMapper.map(productDTO, Product.class);
     }
-    public List<productDTO> asProductDTOList(List<Product> productEntities) {
-        return modelMapper.map(productEntities, new TypeToken<List<productDTO>>() {}.getType());
+    public List<ProductDTO> asProductDTOList(List<Product> productEntities) {
+        return modelMapper.map(productEntities, new TypeToken<List<ProductDTO>>() {}.getType());
     }
 
-    //Order mapping
+    /*order mapping*/
+    public Order toOrderEntity(OrderDTO orderDto) {
+        return modelMapper.map(orderDto, Order.class);
+    }
+
+    /*order details mapping*/
+    public OrderDetailsEntity toOrderDetailsEntity(OrderDetailsDTO orderDetailsDto) {
+        return modelMapper.map(orderDetailsDto, OrderDetailsEntity.class);
+    }
+    public CombinedOrderDto toOrderDetailsDto(OrderDetailsEntity orderDetailsEntity) {
+        return modelMapper.map(orderDetailsEntity, CombinedOrderDto.class);
+    }
+    public List<CombinedOrderDto> toOrderDetailsDtoLists(List<OrderDetailsEntity> orderDetailsEntities) {
+        return modelMapper.map(orderDetailsEntities, new TypeToken<List<CombinedOrderDto>>() {}.getType());
+    }
 
 }

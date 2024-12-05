@@ -1,5 +1,5 @@
 package lk.ijse.posbackendv2.controller;
-import lk.ijse.posbackendv2.dto.impl.productDTO;
+import lk.ijse.posbackendv2.dto.impl.ProductDTO;
 import lk.ijse.posbackendv2.dto.productStatus;
 import lk.ijse.posbackendv2.exception.DataPersistException;
 import lk.ijse.posbackendv2.exception.ProductNotFoundException;
@@ -30,7 +30,7 @@ public class productController {
             @RequestPart("qty")String qty
     ){
         try{
-            productDTO productDTO = new productDTO();
+            ProductDTO productDTO = new ProductDTO();
             productDTO.setProductId(id);
             productDTO.setProductName(name);
             productDTO.setProductType(type);
@@ -46,7 +46,7 @@ public class productController {
         }
     }
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-    public List<productDTO> getAllProducts(){
+    public List<ProductDTO> getAllProducts(){
         return productService.getAllProducts();
     }
 
@@ -77,7 +77,7 @@ public class productController {
             @RequestPart("qty")String qty
     ){
         try{
-            productDTO productDTO = new productDTO();
+            ProductDTO productDTO = new ProductDTO();
             productDTO.setProductId(id);
             productDTO.setProductName(name);
             productDTO.setProductType(type);

@@ -29,8 +29,8 @@ public class WebAppRootConfig {
         DriverManagerDataSource dmds = new DriverManagerDataSource();
         dmds.setDriverClassName("com.mysql.cj.jdbc.Driver");
         dmds.setUrl("jdbc:mysql://localhost:3306/POSv2?createDatabaseIfNotExist=true");
-        dmds.setUsername("uroot");
-        dmds.setPassword("ijse1234");
+        dmds.setUsername("root");
+        dmds.setPassword("Ijse@1234");
         return dmds;
     }
 
